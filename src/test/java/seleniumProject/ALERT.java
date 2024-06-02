@@ -4,7 +4,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ALERT {
     public static void main(String[] args) throws InterruptedException {
@@ -12,12 +18,20 @@ public class ALERT {
         WebDriver driver=new FirefoxDriver();
         driver.get("https://demoqa.com/alerts");
         driver.manage().window().maximize();
-       driver.findElement(By.id("alertButton")).click();
-        Thread.sleep(2000);
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+       WebElement element=driver.findElement(By.id("alertButton"));
+       wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+        wait.until(ExpectedConditions.alertIsPresent());
+        //Thread.sleep(2000);
         driver.switchTo().alert().accept();
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
 
-        driver.findElement(By.cssSelector("button[id^='confirmBut']")).click();
+        WebElement element2= driver.findElement(By.cssSelector("button[id^='confirmBut']"));
+        wait.until(ExpectedConditions.elementToBeClickable(element2));
+        element2.click();
+        wait.until(ExpectedConditions.alertIsPresent());
         Alert alert=driver.switchTo().alert();
         Thread.sleep(200);
         System.out.println(alert.getText());

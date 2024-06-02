@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.time.Duration;
 import java.util.Set;
 
 public class window {
@@ -14,10 +15,11 @@ public class window {
         WebDriver driver=new FirefoxDriver();
         driver.get("https://demoqa.com/browser-windows");
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         String originalWindow= driver.getWindowHandle();
         driver.switchTo().newWindow(WindowType.TAB);
         driver.navigate().to("https://demoqa.com/sample");
-        Thread.sleep(2000);
+       // Thread.sleep(2000);
         System.out.println(driver.findElement(By.id("sampleHeading")).getText());
 
         Set<String> windows=driver.getWindowHandles();
