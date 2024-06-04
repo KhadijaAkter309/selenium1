@@ -1,6 +1,4 @@
 package seleniumProject;
-
-import com.sun.jdi.PathSearchingVirtualMachine;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +22,7 @@ public class actionAPI {
        Actions action=new Actions(driver);
        action.moveToElement(element).moveToElement(element1).perform();
        action.doubleClick(element2).perform();
+       Thread.sleep(3000);
 
        driver.navigate().to("https://demoqa.com/droppable");
        WebElement drageable= driver.findElement(By.id("draggable"));
@@ -31,10 +30,8 @@ public class actionAPI {
        action.dragAndDrop(drageable,dropable).perform();
 
        Thread.sleep(200);
-
-
-       Thread.sleep(2000);
        driver.quit();
+
 
 
     }
