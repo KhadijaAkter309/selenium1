@@ -2,6 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="First Test">
-
+        <classes>
+            <class name="testNG.paraBank">
+                <methods>
+                    <include name="verifyLoginText"></include>
+                    <include name="verifyLogin"></include>
+                </methods>
+            </class>
+        </classes>
     </test>
 </suite>
