@@ -24,6 +24,7 @@ public class BaseParaBank {
 
     @AfterClass
     public  void  tearDown(){
+
         driver.quit();
     }
 
