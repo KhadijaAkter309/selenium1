@@ -31,7 +31,34 @@ public class Login extends BaseParaBank{
         element2.clear();
         element2.sendKeys(password);
         Thread.sleep(3000);
+        driver.findElement(By.cssSelector("input[class^='button']")).click();
 
+       WebElement logOut=driver.findElement(By.linkText("Log Out"));
+                logOut.click();
+
+
+
+    }
+    @Test(dataProvider = "getTestExcelData")
+    public void verifyRegister(String firstName,String lastName,String address) throws InterruptedException {
+        WebElement register=driver.findElement(By.cssSelector("a[href*='register.ht']"));
+        register.click();
+        Thread.sleep(3000);
+
+        WebElement firstnameE= driver.findElement(By.id("customer.firstName"));
+        firstnameE.clear();
+        firstnameE.sendKeys(firstName);
+        Thread.sleep(3000);
+
+        WebElement lastnameE= driver.findElement(By.id("customer.lastName"));
+        lastnameE.clear();
+       lastnameE.sendKeys(lastName);
+        Thread.sleep(3000);
+
+        WebElement addressE= driver.findElement(By.id("customer.address.street"));
+        addressE.clear();
+        addressE.sendKeys(address);
+        Thread.sleep(3000);
 
     }
 
@@ -51,7 +78,7 @@ public class Login extends BaseParaBank{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sheet=book.getSheet("Sheet1");
+        sheet=book.getSheet("Sheet2");
         Object[][] data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
         // System.out.println(sheet.getLastRowNum() + "--------" +
         // sheet.getRow(0).getLastCellNum());
@@ -59,6 +86,7 @@ public class Login extends BaseParaBank{
             for (int k = 0; k < sheet.getRow(0).getLastCellNum(); k++) {
                 data[i][k] = sheet.getRow(i + 1).getCell(k).toString();
                 System.out.println(data[i][k]);
+
             }
         }
         return data;
